@@ -1,4 +1,5 @@
 import mangas from "../models/mangas.js";
+import { authors } from "../models/author.js";
 
 class MangaController {
 
@@ -22,9 +23,13 @@ class MangaController {
     };
 
     static async criarManga (req, res) {
+        const novoManga = req.body;
         try {
-            const novoManga = await mangas.create(req.body);
-            res.status(201).json({message: "Mangá criado com sucesso", mangas: novoManga});
+            const autorEncontrado = await authors.findById(novoManga.authors);
+            console.log("Autor encontrado:", autorEncontrado); 
+            const mangaCompleto = { ...novoManga, authors: { ...autorEncontrado._doc }};
+            const mangaCriado = await mangas.create(mangaCompleto);
+            res.status(201).json({message: "Mangá criado com sucesso", mangas: mangaCriado});
         } catch (erro) {
             res.status(500).json({message: `${erro.message} - Falha ao cadastrar mangá`});
         }

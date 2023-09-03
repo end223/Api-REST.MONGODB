@@ -1,5 +1,5 @@
 import express from "express";
-import MangaController from "../controllers/mangaController.js";
+import MangaController from "../controllers/MangaController.js";
 
 const routes = express.Router();
 
