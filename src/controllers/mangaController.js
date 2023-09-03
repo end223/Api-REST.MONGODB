@@ -55,6 +55,16 @@ class MangaController {
         }
     };
 
+    static async listarMangasPorAutor (req, res) {
+        try {
+            const autor = req.query.autor;
+            const mangasPorAutor = await mangas.find({ authors: autor });
+            res.status(200).json(mangasPorAutor);
+        } catch (erro) {
+            res.status(500).json({message: `${erro.message} - Falha ao encontrar mangas por autor`});
+        }
+    };
+
 };
 
 export default MangaController;

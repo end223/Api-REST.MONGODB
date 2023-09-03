@@ -4,6 +4,7 @@ import MangaController from "../controllers/MangaController.js";
 const routes = express.Router();
 
 routes.get("/mangas", MangaController.listarMangas);
+routes.get("/mangas/busca", MangaController.listarMangasPorAutor);
 routes.get("/mangas/:id", MangaController.listarMangaPorId);
 routes.post("/mangas", MangaController.criarManga);
 routes.put("/mangas/:id", MangaController.atualizarManga);
